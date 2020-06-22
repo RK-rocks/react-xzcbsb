@@ -9,7 +9,7 @@ export default class ColumnChart extends React.Component {
   datasets: [
     {
       label: 'Rainfall',
-      backgroundColor: '#947e1b',
+      backgroundColor: '#A2763B',
       data: []
     }
   ]
