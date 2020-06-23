@@ -29,7 +29,7 @@ const PrintButton = ({id, label}) => (<div className="tc mb4 mt2">
       const input = document.getElementById(id);
       const inputHeightMm = pxToMm(input.offsetHeight);
       const a4WidthMm = 210;
-      const a4HeightMm = 297; 
+      const a4HeightMm = 310; 
       const a4HeightPx = mmToPx(a4HeightMm); 
       const numPages = inputHeightMm <= a4HeightMm ? 1 : Math.floor(inputHeightMm/a4HeightMm) + 1;
       console.log({
@@ -45,7 +45,7 @@ const PrintButton = ({id, label}) => (<div className="tc mb4 mt2">
           // Document of a4WidthMm wide and inputHeightMm high
           if (inputHeightMm > a4HeightMm) {
             // elongated a4 (system print dialog will handle page breaks)
-            const pdf = new jsPDF('p', 'mm', [inputHeightMm+16, a4WidthMm]);
+            const pdf = new jsPDF('p', 'mm', [inputHeightMm+19, a4WidthMm]);
           } else {
             // standard a4
             const pdf = new jsPDF();

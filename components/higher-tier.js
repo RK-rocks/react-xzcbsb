@@ -240,14 +240,14 @@ exports.data = {
             "linkEarned": 12000
         },
         {
-            "month": "2020-07-31",
+            "month": "2020-07-15",
             "net_profit": 31000,
             "total_cost": 23392.72,
             "transactionFees": 400,
             "linkEarned": 12000
         },
         {
-            "month": "2020-06-31",
+            "month": "2020-06-20",
             "net_profit": 31000,
             "total_cost": 23392.72,
             "transactionFees": 400,
@@ -261,7 +261,7 @@ exports.data = {
             "linkEarned": 12000
         },
         {
-            "month": "2020-04-31",
+            "month": "2020-04-20",
             "net_profit": 31000,
             "total_cost": 23392.72,
             "transactionFees": 400,

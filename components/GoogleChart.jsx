@@ -1,6 +1,13 @@
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
 
+const getFormatedDateArray = (date) => {
+  
+    const date = new Date(date)
+    const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
+    const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) 
+    return `${month}`
+}
 
 
 export default class ColumnChart extends React.Component {
@@ -17,7 +24,7 @@ export default class ColumnChart extends React.Component {
 
 getFormatedDateArray = (data) => {
   data.map((value,index)=>{
-    this.state.labels.push(value.date)
+    this.state.labels.push(getFormatedDateArray(value.date))
     this.state.datasets[0].data.push(value.link_earned)
   })
   

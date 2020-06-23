@@ -16,6 +16,39 @@ const getFormatedDateArray = (date) => {
     return `${day} ${month} ${year }`
 }
 
+const getMonthName = (date) => {
+  const date = new Date(date)
+    const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
+    const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) 
+    console.log(`${month}`)
+    switch(`${month}`){
+      case 'Jan':
+        return 'January'
+      case 'Feb':
+        return 'Febuary'
+      case 'Mar':
+        return 'March'
+      case 'Apr':
+        return 'April'
+      case 'May':
+        return 'May'
+      case 'Jun':
+        return 'Jun'
+      case 'Jul':
+        return 'July'
+      case 'Aug':
+        return 'August'
+      case 'Sep':
+        return 'September'
+      case 'Oct':
+        return 'October'
+      case 'Nov':
+        return 'November'
+      case 'Dec':
+        return 'December'
+    }
+}
+
 const MultiPage = ({id}) => (<Page id={id}>
   <div class="top-border"></div>
         <div className="container">
@@ -157,14 +190,14 @@ const MultiPage = ({id}) => (<Page id={id}>
             <table>
               <tr>
                 <th>Date</th>
-                <th>Link Earned</th>
-                <th>Percentage Change (%)</th>
+                <th className='text-align-center'>Link Earned</th>
+                <th className='text-align-center'>Percentage Change (%)</th>
               </tr>
               {Data.data.link_earned.monthly_reports.map((value,index)=>{
                 return <tr>
                   <td>{getFormatedDateArray(value.date)}</td>
-                  <td>{value.link_earned}</td>
-                  <td>{value.percentage_change}</td>
+                  <td className='text-align-center'>{value.link_earned}</td>
+                  <td className='text-align-center'>{value.percentage_change}</td>
                 </tr>
               })}
             </table>
@@ -235,14 +268,14 @@ const MultiPage = ({id}) => (<Page id={id}>
             <table>
               <tr>
                 <th>Date</th>
-                <th>Transaction Fee($)</th>
-                <th>Percentage Change (%)</th>
+                <th className='text-align-center'>Transaction Fee($)</th>
+                <th className='text-align-center'>Percentage Change (%)</th>
               </tr>
               {Data.data.gas_expenses.monthly_reports.map((value,index)=>{
                 return <tr>
                   <td>{getFormatedDateArray(value.date)}</td>
-                  <td>{value.gas_expenses}</td>
-                  <td>{value.percentage_change}</td>
+                  <td className='text-align-center'>{value.gas_expenses}</td>
+                  <td className='text-align-center'>{value.percentage_change}</td>
                 </tr>
               })}
             </table>
@@ -260,24 +293,26 @@ const MultiPage = ({id}) => (<Page id={id}>
             <table>
               <tr>
                 <th>Date</th>
-                <th>Net Profit($)</th>
-                <th>Profit Margin(%)</th>
-                <th>Monthly Growth Rate(%)</th>
+                <th className='text-align-center'>Net Profit($)</th>
+                <th className='text-align-center'>Profit Margin(%)</th>
+                <th className='text-align-center'>Monthly Growth Rate(%)</th>
               </tr>
               {Data.data.net_profit.monthly_reports.map((value,index)=>{
                 return <tr>
                   <td>{getFormatedDateArray(value.date)}</td>
-                  <td>{value.net_profit}</td>
-                  <td>{value.profit_margin}</td>
-                  <td>{value.percentage_change}</td>
+                  <td className='text-align-center'>{value.net_profit}</td>
+                  <td className='text-align-center'>{value.profit_margin}</td>
+                  <td className='text-align-center'>{value.percentage_change}</td>
                 </tr>
               })}
             </table>
           </div>
-          <div className='row mt-5'>
+          {Data.data.monthly_reports.map((value,index)=>{
+                return <div> 
+                <div className='row mt-5'>
 
             <div className="col-6 text-align">
-              <div className='title'>August Report</div>
+              <div className='title'>{getMonthName(value.month)} Report</div>
               {/* <div className='mt-5'>Select Data link</div> */}
               <div className="row mt-4 link-earned-total-title">
                 <div className="col-6 ">
@@ -287,7 +322,7 @@ const MultiPage = ({id}) => (<Page id={id}>
                 </div>
                 <div className="col-6 ">
                   <div>
-                    $ 3333
+                    {Data.data.currency} {value.net_profit}
                  </div>
                 </div>
               </div>
@@ -317,707 +352,21 @@ const MultiPage = ({id}) => (<Page id={id}>
                 <th>Money Out</th>
               </tr>
               <tr>
-                <td>31 july 2019</td>
+                <td>{getFormatedDateArray(value.month)}</td>
                 <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
+                <td>{Data.data.currency} {value.transactionFees}</td>
+                <td>{Data.data.currency} {value.transactionFees}</td>
               </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
+             <tr>
+                <td>{getFormatedDateArray(value.month)}</td>
                 <td>Revenue from link earned</td>
-                <td></td>
+                <td>{Data.data.currency} {value.linkEarned}</td>
                 <td></td>
               </tr>
             </table>
           </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>August Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
           </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>Suptember Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>October Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>November Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>December Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>January Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>Febuary Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>March Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>April Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>May Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
-          <div className='row mt-5'>
-
-            <div className="col-6 text-align">
-              <div className='title'>Jun Report</div>
-              {/* <div className='mt-5'>Select Data link</div> */}
-              <div className="row mt-4 link-earned-total-title">
-                <div className="col-6 ">
-                  <div className=''>
-                    Net Profit:
-                 </div>
-                </div>
-                <div className="col-6 ">
-                  <div>
-                    $ 3333
-                 </div>
-                </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Growth Rate?
-               </div>
-                <div className="col-6">
-                  
-               </div>
-              </div>
-              <div className="row mt-1 link-earned-total-title">
-                <div className="col-6">
-                  Change Still Last Month?
-               </div>
-                <div className="col-6">
-               </div>
-              </div>
-            </div>
-          </div>
-          <div className='row m-0 mt-5'>
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Transcation Details</th>
-                <th>Money In</th>
-                <th>Money Out</th>
-              </tr>
-              <tr>
-                <td>31 july 2019</td>
-                <td>Trancastion Expense(Gas)</td>
-                <td></td>
-                <td>$400</td>
-              </tr>
-              <tr>
-                <td>31 Aug 2019</td>
-                <td>Cloud Expense</td>
-                <td>3.11</td>
-                <td>$6000</td>
-              </tr>
-              <tr>
-                <td>31 Sept 2019</td>
-                <td>Revenue from link earned</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
+              })}
         </div>
 </Page>);
 
