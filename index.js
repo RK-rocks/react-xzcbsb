@@ -8,8 +8,13 @@ import PrintButton from "./components/PrintButton";
 import ReactDOM from 'react-dom'
 // import App from "./App"
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import WebFont from 'webfontloader';
 
-
+WebFont.load({
+  google: {
+    families: ['Titillium Web:300,400,700', 'sans-serif']
+  }
+});
 
 
 
