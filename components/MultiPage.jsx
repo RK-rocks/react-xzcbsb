@@ -21,6 +21,7 @@ const getMonthName = (date) => {
     const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
     const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) 
     console.log(`${month}`)
+    console.warn('warn');
     switch(`${month}`){
       case 'Jan':
         return 'January'
@@ -57,7 +58,8 @@ const MultiPage = ({id}) => (<Page id={id}>
             </div>
             {/* <div className="row"> */}
             <div className="col-6 text-align">
-              <div className='title'>{Data.data.profile.name}</div>
+              <div className='title'>
+              b{Data.data.profile.name}</div>
               <div className='number'>{Data.data.profile.oracle_address}</div>
               {/* <div className='mt-5'>Select Data link</div> */}
               <div className='mt-4 font-size-12'>{Data.data.date}</div>

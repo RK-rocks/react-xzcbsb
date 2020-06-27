@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Roboto+Mono|Work+Sans:400,700&display=swap');
+@font-face {
+  font-family: 'Montserrat';
+  src: url(/assets/Montserrat/Montserrat-Light.ttf) format("truetype");
+  font-weight:300;
+}
 
 .title {
     font-size: 30px !important;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 font-style: normal;
-font-weight: bold;s
+font-weight: bold;
     text-align: left;
     font-family: 'Ubuntu' !important;
 }
