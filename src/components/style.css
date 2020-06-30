@@ -1,23 +1,23 @@
-@font-face {
-  font-family: 'Montserrat';
-  src: url(/assets/Montserrat/Montserrat-Light.ttf) format("truetype");
-  font-weight:300;
-}
+@import url('https://fonts.googleapis.com/css?family=Work+Sans&display=swap');
 
 .title {
     font-size: 30px !important;
-    font-family: 'Montserrat', sans-serif;
+    
 font-style: normal;
 font-weight: bold;
     text-align: left;
-    font-family: 'Ubuntu' !important;
+    /* font-family: 'Ubuntu' !important; */
+}
+
+.font-family{
+  font-family: 'Work Sans Pro', sans-serif;
 }
 
 .number{
     font-size: 12px !important;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     text-align: left;
-    font-family: 'Ubuntu' !important;
+    /* font-family: 'Ubuntu' !important; */
 }
 
 .text-align{
@@ -34,9 +34,9 @@ font-weight: bold;
 
 .link-earned-total-title{
     font-size: 12px !important;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     text-align: left;
-    font-family: 'Ubuntu' !important;
+    /* font-family: 'Ubuntu' !important; */
     font-weight: 700;
 }
 
@@ -87,7 +87,7 @@ table {
   }
 
   .before-logo-text{
-    font-family: Work Sans;
+    /* font-family: Work Sans; */
     font-style: normal;
     font-weight: normal;
     font-size: 11px;
@@ -107,7 +107,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     font-size: 12px !important;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-family: 'Ubuntu' !important;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    /* font-family: 'Ubuntu' !important; */
     font-weight: 900;
   }

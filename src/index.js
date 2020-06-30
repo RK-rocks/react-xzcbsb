@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import SinglePage from "./src/components/SinglePage";
-import MultiPage from "./src/components/MultiPage";
-import SmallerTier from "./src/components/SmallerTier";
-import PrintButton from "./src/components/PrintButton";
+import SinglePage from "./components/SinglePage";
+import MultiPage from "./components/MultiPage";
+import SmallerTier from "./components/SmallerTier";
+import PrintButton from "./components/PrintButton";
 import ReactDOM from 'react-dom'
 // import App from "./App"
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import WebFont from 'webfontloader';
 
 WebFont.load({
-  google: {
-    families: ['Titillium Web:300,400,700', 'sans-serif']
-  }
+    google: {
+        families: ['Titillium Web:300,400,700', 'sans-serif']
+    }
 });
 
 
 
 const App = () => (<div className="bg-black-80 w-100 pv5">
-  <div className="white mt5 tc f3">Higher tier Mode</div>
-  <PrintButton id={"multiPage"} label={"Print multiplate pages"} />
-  <MultiPage id={"multiPage"} />
-  <div className="white mt5 tc f3">Small tier pdf</div>
-  <PrintButton id={"smallerTier"} label={"Print multiplate pages"} />
-  <SmallerTier id={"smallerTier"} />
+    <div className="white mt5 tc f3">Higher tier Mode</div>
+    <PrintButton id={"multiPage"} label={"Print multiplate pages"} />
+    <MultiPage id={"multiPage"} />
+    <div className="white mt5 tc f3">Small tier pdf</div>
+    <PrintButton id={"smallerTier"} label={"Print multiplate pages"} />
+    <SmallerTier id={"smallerTier"} />
 </div>);
 
 // const routing = (
