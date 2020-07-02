@@ -27,50 +27,77 @@ const PrintButton = ({ id, label }) => (<div className="tc mb4 mt2">
   <div
     className="pa2 ba bw1 b--black bg-yellow black-90 br2 dib pointer dim shadow-1"
     onClick={() => {
-      const input = document.getElementById(id);
-      const inputHeightPx = mmToPx(input.offsetHeight)
-      const inputHeightMm = pxToMm(input.offsetHeight);
-      const a4WidthMm = 210;
-      const a4HeightMm = 295;
-      const a4HeightPx = mmToPx(a4HeightMm);
-      const numPages = inputHeightMm <= a4HeightMm ? 1 : Math.floor(inputHeightMm / a4HeightMm) + 1;
-      console.log({
-        input, inputHeightMm, a4HeightMm, a4HeightPx, numPages, range: range(0, numPages),
-        comp: inputHeightMm <= a4HeightMm, inputHeightPx: input.offsetHeight
-      });
+      // const input = document.getElementById(id);
+      // const inputHeightPx = mmToPx(input.offsetHeight)
+      // const inputHeightMm = pxToMm(input.offsetHeight);
+      // const a4WidthMm = 210;
+      // const a4HeightMm = 295;
+      // const a4HeightPx = mmToPx(a4HeightMm);
+      // const numPages = inputHeightMm <= a4HeightMm ? 1 : Math.floor(inputHeightMm / a4HeightMm) + 1;
+      // console.log({
+      //   input, inputHeightMm, a4HeightMm, a4HeightPx, numPages, range: range(0, numPages),
+      //   comp: inputHeightMm <= a4HeightMm, inputHeightPx: input.offsetHeight
+      // });
 
 
 
-      html2canvas(input, {
-        allowTaint: false,
-        removeContainer: true,
-        backgroundColor: '#ffffff',
-        scale: window.devicePixelRatio,
-        useCORS: false
-      }).then(canvas => {
-        const contentDataURL = canvas.toDataURL('image/png', 1.0)
-        const imgWidth = 210;
-        const pageHeight = 295;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
-        console.log('imgHeight', imgHeight)
-        console.log('imgWidth', imgWidth)
-        let heightLeft = imgHeight;
+      // html2canvas(input, {
+      //   allowTaint: false,
+      //   removeContainer: true,
+      //   backgroundColor: '#ffffff',
+      //   scale: window.devicePixelRatio,
+      //   useCORS: false
+      // }).then(canvas => {
+      //   const contentDataURL = canvas.toDataURL('image/png', 1.0)
+      //   const imgWidth = 210;
+      //   const pageHeight = 295;
+      //   const imgHeight = canvas.height * imgWidth / canvas.width;
+      //   console.log('imgHeight', imgHeight)
+      //   console.log('imgWidth', imgWidth)
+      //   let heightLeft = imgHeight;
 
-        let pdf = new jsPDF('1', 'mm', 'a4'); // A4 size page of PDF
+      //   let pdf = new jsPDF('1', 'mm', 'a4'); // A4 size page of PDF
 
 
-        let position = 5;
+      //   let position = 5;
 
-        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-        heightLeft -= pageHeight;
+      //   pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      //   heightLeft -= pageHeight;
 
-        while (heightLeft >= 0) {
-          position = heightLeft - imgHeight;
-          pdf.addPage();
-          pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-          heightLeft -= pageHeight;
+      //   while (heightLeft >= 0) {
+      //     position = heightLeft - imgHeight;
+      //     pdf.addPage();
+      //     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      //     heightLeft -= pageHeight;
+      //   }
+      //   pdf.save(`${id}.pdf`); // Generated PDF
+      // });
+
+
+      let HTML_Width = document.getElementById(id).offsetWidth;
+      let HTML_Height = document.getElementById(id).offsetHeight;
+      let top_left_margin = 1;
+      let PDF_Width = HTML_Width + (top_left_margin * 2);
+      let PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+      let canvas_image_width = HTML_Width;
+      let canvas_image_height = HTML_Height;
+      let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+      html2canvas(document.getElementById(id), { allowTaint: true }).then(function (canvas) {
+        canvas.getContext('2d');
+        let imgData = canvas.toDataURL("image/jpeg");
+        let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+        let counter = 0;
+
+        for (let i = 1; i <= totalPDFPages; i++) {
+          counter++;
+          pdf.addPage(PDF_Width, PDF_Height);
+          pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
         }
-        pdf.save(`${id}.pdf`); // Generated PDF
+        pdf.save(`${id}.pdf`);
       });
 
 
