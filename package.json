@@ -5,6 +5,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "4.9.27",
     "bootstrap": "4.5.0",
+    "canvas2image": "^1.0.5",
     "chart.js": "2.9.3",
     "html2canvas": "1.0.0-alpha.12",
     "jquery": "3.5.1",
